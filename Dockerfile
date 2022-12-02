@@ -21,6 +21,9 @@ RUN go build -o memos ./bin/server/main.go
 
 # Make workspace with above generated files.
 FROM alpine:3.16 AS monolithic
+# 使用 HTTPS 协议访问容器云调用证书安装
+RUN apk add ca-certificates
+
 WORKDIR /app
 
 COPY --from=backend /app/memos /app/
